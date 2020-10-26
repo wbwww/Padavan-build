@@ -50,6 +50,7 @@ jobs:
           cp -f dhcp/dnsmasq.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
           cp -f dhcp/dnsmasq.h /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
           cp -f dhcp/option.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
+          cp -f miniupnpd/miniupnpd.c /opt/rt-n56u/trunk/user/miniupnpd/miniupnpd-2.x
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
