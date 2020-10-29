@@ -131,6 +131,8 @@ jobs:
           sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config
           sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config
           sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config
+          sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config
+          sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' .config
           #校园网相关
           sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
           ######################################################################
@@ -147,8 +149,8 @@ jobs:
           echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
           echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config #socks5
           #
-          echo "CONFIG_FIRMWARE_INCLUDE_IPT2SOCKS=y" >> .config
-          echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config
+          echo "CONFIG_FIRMWARE_INCLUDE_IPT2SOCKS=n" >> .config
+          echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config
           echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #可以不集成
           echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
           echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
@@ -178,6 +180,8 @@ jobs:
           echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config
           echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> .config
           echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config
+          echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config
+          echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config
           #校园网相关
           #########################################################################################
           #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
