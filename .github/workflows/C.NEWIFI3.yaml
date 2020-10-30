@@ -61,6 +61,7 @@ jobs:
           cp -f dhcp/option.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
           cp -f miniupnpd/miniupnpd.c /opt/rt-n56u/trunk/user/miniupnpd/miniupnpd-2.x
           cp -f adg/adguardhome.sh /opt/rt-n56u/trunk/user/adguardhome
+          cp -f ssp/Makefile /opt/rt-n56u/trunk/user/v2ray
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
@@ -72,12 +73,7 @@ jobs:
           cd /opt/hostedtoolcache/go
           rm -rf /opt/hostedtoolcache/go/1.14.10
           mv 1.15.3 1.14.10
-      - name: Reset v2ray
-        run: |
-          cd /opt/rt-n56u/trunk/user/v2ray
-          sudo chmod +x ./Makefile
-          sed -i "s#4.31.2#4.31.3#g" ./Makefile
-          sed -i "s#https://codeload.github.com/v2ray#https://codeload.github.com/v2fly#g" ./Makefile
+
       #- name: SSH connection to Actions
       #  uses: P3TERX/ssh2actions@v1.0.0
       - name: copy Yh793
