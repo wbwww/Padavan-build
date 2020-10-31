@@ -61,7 +61,8 @@ jobs:
           cp -f dhcp/option.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
           cp -f miniupnpd/miniupnpd.c /opt/rt-n56u/trunk/user/miniupnpd/miniupnpd-2.x
           cp -f adg/adguardhome.sh /opt/rt-n56u/trunk/user/adguardhome
-          cp -f ssp/Makefile /opt/rt-n56u/trunk/user/v2ray
+          cp -f ssp/Makefile /opt/rt-n56u/trunk/user/shadowsocks
+          cp -f ssp/v2/Makefile /opt/rt-n56u/trunk/user/v2ray
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
