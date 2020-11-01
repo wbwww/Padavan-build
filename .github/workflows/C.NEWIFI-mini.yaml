@@ -43,18 +43,7 @@ jobs:
           cd /opt/rt-n56u/toolchain-mipsel
           sh dl_toolchain.sh
           mkdir -p /opt/images/
-      - name: copy
-        run: |
-          cp -f dhcp/mtd_storage.sh /opt/rt-n56u/trunk/user/scripts
-          cp -f dhcp/cache.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f dhcp/dnsmasq.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f dhcp/dnsmasq.h /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f dhcp/option.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f miniupnpd/miniupnpd.c /opt/rt-n56u/trunk/user/miniupnpd/miniupnpd-2.x
-          cp -f adg/adguardhome.sh /opt/rt-n56u/trunk/user/adguardhome
-          cp -f adg/adbyby_host.sh /opt/rt-n56u//trunk/user/adbyby
-          cp -f ssp/Makefile /opt/rt-n56u/trunk/user/shadowsocks
-          cp -f ssp/v2/Makefile /opt/rt-n56u/trunk/user/v2ray
+      
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
@@ -67,8 +56,8 @@ jobs:
           rm -rf /opt/hostedtoolcache/go/1.14.10
           mv 1.15.3 1.14.10
 
-      #- name: SSH connection to Actions
-      #  uses: P3TERX/ssh2actions@v1.0.0
+      - name: SSH connection to Actions
+        uses: P3TERX/ssh2actions@v1.0.0
       - name: Build Firmware
         env:
           TNAME: NEWIFI-MINI #PSG1218 K2P-5.0 K2P K2P_nano K2P_nano-5.0 PSG1208 PSG1218_nano
