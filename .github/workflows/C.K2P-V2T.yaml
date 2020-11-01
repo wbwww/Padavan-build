@@ -39,31 +39,10 @@ jobs:
           pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin
       - name: Clone source code
         run: |
-          git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+          git clone -b chongshengB --depth=1 https://github.com/Yh793/rt-n56u.git /opt/rt-n56u
           cd /opt/rt-n56u/toolchain-mipsel
           sh dl_toolchain.sh
           mkdir -p /opt/images/
-      - name: Clone Yh793 source
-        id: yh
-        run: |
-          git clone --depth=1 https://github.com/Yh793/rt-n56u.git /opt/tmp
-          echo "###########################"
-          echo "###########################"
-          echo "###########################"
-          echo "::set-output name=status::success"
-      - name: copy
-        if: steps.yh.outputs.status == 'success'
-        run: |
-          cp -f dhcp/mtd_storage.sh /opt/rt-n56u/trunk/user/scripts
-          cp -f dhcp/cache.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f dhcp/dnsmasq.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f dhcp/dnsmasq.h /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f dhcp/option.c /opt/rt-n56u/trunk/user/dnsmasq/dnsmasq-2.7x/src
-          cp -f miniupnpd/miniupnpd.c /opt/rt-n56u/trunk/user/miniupnpd/miniupnpd-2.x
-          cp -f adg/adguardhome.sh /opt/rt-n56u/trunk/user/adguardhome
-          cp -f adg/adbyby_host.sh /opt/rt-n56u//trunk/user/adbyby
-          cp -f ssp/Makefile /opt/rt-n56u/trunk/user/shadowsocks
-          cp -f ssp/v2/Makefile /opt/rt-n56u/trunk/user/v2ray
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
@@ -78,11 +57,7 @@ jobs:
 
       #- name: SSH connection to Actions
       #  uses: P3TERX/ssh2actions@v1.0.0
-      - name: copy Yh793
-        if: steps.yh.outputs.status == 'success'
-        run: |
-          cd /opt
-          cp -r -f /opt/tmp/trunk/linux-3.4.x /opt/rt-n56u/trunk
+
       - name: Build Firmware
         env:
           TNAME: K2P_nano-5.0 #PSG1218 K2P-5.0 K2P K2P_nano K2P_nano-5.0 PSG1208 PSG1218_nano
