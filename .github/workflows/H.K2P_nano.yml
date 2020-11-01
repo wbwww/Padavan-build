@@ -1,5 +1,5 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: H.PSG1218
+name: H.K2P_nano-5.0
 
 on:
   workflow_dispatch:
@@ -55,13 +55,13 @@ jobs:
         uses: 1466587594/get-current-time@v2
         id: current-time
         with:
-          format: YYYYMMDDHH
+          format: YY.MMDDHH
           utcOffset: "+08:00"
       #- name: SSH connection to Actions
       #  uses: P3TERX/ssh2actions@v1.0.0  
       - name: Build Firmware
         env:
-          TNAME: PSG1218 #K2P_nano-5.0 PSG1218 K2P-5.0 K2P K2P_nano PSG1208 PSG1218_nano
+          TNAME: K2P_nano-5.0 #K2P_nano-5.0 PSG1218 K2P-5.0 K2P K2P_nano PSG1208 PSG1218_nano
         run: |
           cd /opt/rt-n56u/trunk
           if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -99,8 +99,8 @@ jobs:
         id: cowtransfer
         if: steps.wetransfer.outputs.status == 'success'
         run: |
-          curl -sL https://git.io/cowtransfer | sh 
-          ./transfer cow --block 2621440 -s -p 64 /opt/images/*.trx 2>&1 | tee cowtransfer.log
+          curl -sL https://git.io/cowtransfer | sh
+          ./cowtransfer-uploader -s -p 16 /opt/images/*.trx 2>&1 | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
           echo "DOWNLOADURL=$(cat cowtransfer.log | grep -o -E "https?://[a-zA-Z0-9\.\/_&=@$%?~#-]*")" >> $GITHUB_ENV
           echo "::set-output name=status::success"
@@ -108,7 +108,7 @@ jobs:
         if: steps.cowtransfer.outputs.status == 'success'
         run: |
           git pull origin master
-          sed "14c * 当前最新版本:${FNAME}.${{ steps.current-time.outputs.formattedTime }}.trx  最后编译时间: $(date -u -d '+8 hour' '+%Y-%m-%d %H:%M:%S')  下载地址: [奶牛快传](${DOWNLOADURL})  [WeTransfer](${DOWNLOADURL2})" README.md -i
+          sed "12c * 当前最新版本:${FNAME}.${{ steps.current-time.outputs.formattedTime }}.trx  最后编译时间: $(date -u -d '+8 hour' '+%Y-%m-%d %H:%M:%S')  下载地址: [奶牛快传](${DOWNLOADURL})  [WeTransfer](${DOWNLOADURL2})" README.md -i
           git config user.name  Robot
           git config user.email github-actions@github.com
           git commit -m "update README.md" -a
