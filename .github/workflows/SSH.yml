@@ -40,6 +40,18 @@ jobs:
       - name: Clone source code
         run: |
           git clone -b chongshengB https://github.com/Yh793/rt-n56u.git /opt/rt-n56u
+      - name: set go
+        run: |
+          cd /opt/hostedtoolcache/go
+          rm -rf /opt/hostedtoolcache/go/1.14.10
+          mv 1.15.3 1.14.10
+      - name: Update UPX
+        run: |
+          mkdir -p /opt/upx
+          cd /opt/upx
+          wget https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz
+          tar -Jxf upx*.tar.xz
+          sudo cp upx*/upx /usr/bin
 
       - name: SSH connection to Actions
         uses: P3TERX/ssh2actions@v1.0.0
@@ -49,4 +61,3 @@ jobs:
         if: always()
         with:
           age: '3 day'
-          skip-recent: 5
