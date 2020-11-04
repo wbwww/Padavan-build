@@ -8,17 +8,17 @@ on:
         description: "Build Padavan"
         required: true
         default: "build"
-  #release:
-  # types: [created]
+  release:
+    types: published
   push:
-    tags:
-      - "v*"
-  #  branches:
-  #    - master
-  #  schedule:
-  #    - cron: 0 8 * * 5
-  #watch:
-  #  types: [started]
+    branches:
+      - master
+    paths:
+      - '.config'
+  #schedule:
+    #- cron: 0 8 * * 5
+  watch:
+    types: started
 
 jobs:
   build:
